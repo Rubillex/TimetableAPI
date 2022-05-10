@@ -37,6 +37,4 @@ class HomeController extends Controller {
         echo $outGet;
         return;
     }
-
-
 }

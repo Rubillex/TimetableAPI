@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/',                      [HomeController::class, 'index']);
+Route::get('/timetable',                      [HomeController::class, 'index']);
 
 Route::post('/timetable/api/searchTimetable/{name}/{type}', [\App\Http\Controllers\TimetableController::class, 'searchTimetable']);
 Route::post('/timetable/api/getTimetable/{query}/{type}/{numGroup}', [\App\Http\Controllers\TimetableController::class, 'getTimetable']);
