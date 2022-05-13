@@ -18,7 +18,7 @@ export default {
     },
     methods: {
         async Search(){
-            await axios.post('/api/searchTimetable/' + 585 + '/' + 'students')
+            await axios.post('http://194.67.74.159/api/searchTimetable/' + 585 + '/' + 'students')
             .then(response => this.searchResult = response.data)
         }
     }
