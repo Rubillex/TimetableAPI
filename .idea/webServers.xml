@@ -9,8 +9,8 @@
           </advancedOptions>
         </fileTransfer>
       </webServer>
-      <webServer id="bc195612-ad06-4eb4-b00f-d6efbbd0e339" name="hacaton">
-        <fileTransfer accessType="SFTP" host="185.46.8.127" port="22" sshConfigId="d38eec99-b447-4888-9de1-24b670908dac" sshConfig="root@185.46.8.127:22 password">
+      <webServer id="506f0a60-78cd-4cb0-90db-94dd2ace6b51" name="TimetableAPI">
+        <fileTransfer accessType="SFTP" host="194.67.74.159" port="22" sshConfigId="d38eec99-b447-4888-9de1-24b670908dac" sshConfig="root@194.67.74.159:22 password">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>

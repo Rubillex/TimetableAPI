@@ -2,7 +2,7 @@
 <project version="4">
   <component name="PublishConfigData" serverName="small-world" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
-      <paths name="hacaton">
+      <paths name="TimetableAPI">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />

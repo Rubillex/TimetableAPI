@@ -18,5 +18,5 @@ use Illuminate\Support\Facades\Route;
 //Route::middleware('auth:api')->get('/user', function (Request $request) {
 //    return $request->user();
 //});
-Route::post('/timetable/api/searchTimetable/{name}/{type}', [TimetableController::class, 'searchTimetable']);
-Route::post('/timetable/api/getTimetable/{query}/{type}/{numGroup}', [TimetableController::class, 'getTimetable']);
+Route::post('/searchTimetable/{name}/{type}', [TimetableController::class, 'searchTimetable']);
+Route::post('/getTimetable/{query}/{type}/{numGroup}', [TimetableController::class, 'getTimetable']);

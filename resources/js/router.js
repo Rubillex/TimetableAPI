@@ -6,7 +6,7 @@
 import VueRouter from 'vue-router';
 
 import Vue from 'vue';
-import StartGame from "./components/StartGameComponent";
+import IndexComponent from "./components/IndexComponent";
 
 Vue.use(VueRouter);
 
@@ -14,7 +14,7 @@ const router =  [
         {
             path: '/start-game',
             name: 'start-game',
-            component: StartGame
+            component: IndexComponent
         }
     ];
 

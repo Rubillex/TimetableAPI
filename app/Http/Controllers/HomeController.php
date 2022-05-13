@@ -29,6 +29,8 @@ class HomeController extends Controller {
      */
     public function index() {
 
+        return view('index')->with('data', ['page' => 'index']);
+
         $table = (new TimetableController);
 
         $outSearch = $table->searchTimetable("Уланов", "lecturers");

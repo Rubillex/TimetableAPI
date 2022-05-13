@@ -15,9 +15,11 @@ use \App\Http\Controllers\TimetableController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/timetable',                      [HomeController::class, 'index']);
 
-
+Route::post('/searchTimetable/{name}/{type}', [TimetableController::class, 'searchTimetable']);
+Route::post('/getTimetable/{query}/{type}/{numGroup}', [TimetableController::class, 'getTimetable']);
 
 Route::get('/reset-password/{token}', function ($token) {
     return view('auth.passwords.reset', ['token' => $token]);
