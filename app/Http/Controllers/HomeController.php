@@ -33,7 +33,7 @@ class HomeController extends Controller {
 
         $outSearch = $table->searchTimetable("Уланов", "lecturers");
         echo $outSearch;
-        $outGet = $table->getTimetable("/timetable/lecturers/19/103/2122095731/", "lecturers", 585);
+        $outGet = $table->getTimetable("\/timetable\/lecturers\/19\/103\/2122095731\/", "lecturers", 585);
         echo $outGet;
         return;
     }

@@ -48,6 +48,9 @@ class TimetableController extends Controller
         $teacher    = "";
         $secondTime = "";
 
+        $query = str_replace('\\', '', $query);
+
+
         $link = "https://www.asu.ru$query";
         $html = file_get_contents($link);
 
