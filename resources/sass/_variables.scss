@@ -1,0 +1,47 @@
+// Body
+$body-bg: #f8fafc;
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@100&family=Roboto:wght@100&display=swap');
+// Typography
+$font-family-sans-serif: 'Nunito', sans-serif;
+
+$primary-font-family: Roboto, sans-serif;
+$secondary-font-family: Roboto, sans-serif;
+
+$font-size-base: 0.9rem;
+$line-height-base: 1.6;
+
+$page-gutter: 120px;
+
+$base-color: #73F4DB;
+$cool-color: #FF91AB;
+$cosmo-color: #CB9FFF;
+
+$primary-background-color: #4C3375;
+$primary-text-color: #FFF;
+
+
+body {
+    font-family: $primary-font-family;
+    background-size: 2%;
+    background-color: $primary-background-color;
+    color: black;
+    box-sizing: border-box;
+}
+
+.page-content {
+    color: $primary-text-color;
+    margin-left:  $page-gutter;
+    margin-right: $page-gutter;
+}
+
+.login-page {
+    margin-top: 25%;
+}
+
+.register-page {
+    margin-top: 15%;
+}
+
+.hide {
+    display: none;
+}

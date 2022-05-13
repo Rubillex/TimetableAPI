@@ -1,0 +1,30 @@
+@import "resources/sass/_variables.scss";
+
+.navbar {
+    margin-left: 90px;
+    margin-right: 90px;
+
+    &__left {
+        padding: 30px;
+        color: #FFFFFF;
+        font-size: 28px;
+        line-height: 36px;
+        font-family: $primary-font-family;
+        text-decoration: none;
+        cursor: pointer;
+        &:hover {
+            color: #C7CBCE;
+        }
+    }
+    &__right {
+        padding: 30px;
+        color: #FFFFFF;
+        font-size: 28px;
+        line-height: 36px;
+        font-family: $primary-font-family;
+        cursor: pointer;
+        &:hover {
+            color: #C7CBCE;
+        }
+    }
+}

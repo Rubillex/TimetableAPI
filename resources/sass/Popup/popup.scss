@@ -1,0 +1,23 @@
+@import 'resources/sass/_variables.scss';
+
+.modaltor__overlay {
+    background-image: url("../../img/pattern.svg") !important;
+    background-size: 2% !important;;
+    background-color: $primary-background-color !important;;
+    color: black !important;;
+}
+
+.modaltor__panel{
+    background: #E1C8FF !important;
+}
+
+.modal-title {
+    margin-top: 25px;
+    align-self: center;
+    margin-bottom: 30px;
+    color: #000000;
+    font-size: 70px;
+    line-height: 72px;
+    font-weight: bold;
+    font-family: Roboto, sans-serif;
+}

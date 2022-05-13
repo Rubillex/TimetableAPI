@@ -1,0 +1,24 @@
+// Не забываем про импорт переменных
+@import '../variables';
+
+.chat {
+    .chat-box {
+        display: flex;
+        flex-direction: column;
+        width: 500px;
+        height: auto;
+        border: 1px solid black;
+
+        .message {
+            margin: 0;
+        }
+
+        .name {
+            color: black;
+            font-weight: 650;
+            &__my {
+                color: indianred;
+            }
+        }
+    }
+}
