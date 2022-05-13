@@ -17,8 +17,7 @@ use \App\Http\Controllers\TimetableController;
 */
 Route::get('/timetable',                      [HomeController::class, 'index']);
 
-Route::post('/timetable/api/searchTimetable/{name}/{type}', [TimetableController::class, 'searchTimetable']);
-Route::post('/timetable/api/getTimetable/{query}/{type}/{numGroup}', [TimetableController::class, 'getTimetable']);
+
 
 Route::get('/reset-password/{token}', function ($token) {
     return view('auth.passwords.reset', ['token' => $token]);
