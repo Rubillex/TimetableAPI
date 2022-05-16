@@ -19,4 +19,6 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 Route::post('/searchTimetable/{name}/{type}', [TimetableController::class, 'searchTimetable']);
-Route::post('/getTimetable/{query}/{type}/{numGroup}', [TimetableController::class, 'getTimetable']);
+Route::post('/getTimetable/{type}/{numGroup}/{weekNum}/{date1}/{date2}', [TimetableController::class, 'getTimetable']);
+Route::get('/index', [TimetableController::class, 'index']);
+

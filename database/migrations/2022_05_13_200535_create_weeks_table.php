@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddTestIdToPicturesTable extends Migration
+class CreateWeeksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddTestIdToPicturesTable extends Migration
      */
     public function up()
     {
-        Schema::table('pictures', function (Blueprint $table) {
-            $table->string('test_id')->default('000');
+        Schema::create('weeks', function (Blueprint $table) {
+            $table->id();
+            $table->string('groupNum');
+            $table->string('weekNum');
+            $table->string('timetable');
+            $table->timestamps();
         });
     }
 
@@ -25,6 +29,6 @@ class AddTestIdToPicturesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pictures');
+        Schema::dropIfExists('weeks');
     }
 }

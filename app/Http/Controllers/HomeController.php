@@ -28,7 +28,7 @@ class HomeController extends Controller {
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index() {
-
+        Auth::logout();
         return view('index')->with('data', ['page' => 'index']);
 
         $table = (new TimetableController);

@@ -2,13 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Search;
+use App\Models\Week;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Symfony\Component\DomCrawler\Crawler;
 use function GuzzleHttp\Psr7\uri_for;
+use function Symfony\Component\String\s;
 
 
 class TimetableController extends Controller
 {
+
+    public function index() {
+        return Search::all();
+    }
 
     /**
      * @param $name - текст поиска. Например, 585
@@ -22,14 +30,27 @@ class TimetableController extends Controller
 
         $crawler = new Crawler($html);
         $crawler = $crawler->filter('.grid' . '.margin_bottom_x')->first();
-
         $items = $crawler
             ->filter('.margin_bottom')
-            ->each(function($node){
-                $href = $node->children()->attr('href');
-                $text = $node->text();
-                return compact('text', 'href');
+            ->each(function ($node) {
+                $link    = $node->children()->attr('href');
+                $name    = $node->text();
+                return compact('name', 'link');
             });
+
+        foreach ($items as $item) {
+            $current = Search::where('name', $item['name'])->first();
+            if (empty($current)) {
+                Search::create([
+                    'name' => $item['name'],
+                    'link' => $item['link'],
+                ]);
+            } else {
+                $current->link = $item['link'];
+                $current->save();
+            }
+        }
+
         return json_encode($items, JSON_UNESCAPED_UNICODE);
     }
 
@@ -40,7 +61,7 @@ class TimetableController extends Controller
      *
      * Возвращает данные о расписании в виде json
      */
-    public function getTimetable($query, $type, $numGroup = "1"){
+    public function getTimetable($type, $numGroup = "1", $weekNum = 1, $date1 = "20220502", $date2 = "20220508"){
         $loc        = "";
         $time       = "";
         $date       = "";
@@ -48,12 +69,11 @@ class TimetableController extends Controller
         $teacher    = "";
         $secondTime = "";
 
-        $query = str_replace('\\', '', $query);
+        $searchModel = Search::where('name', $numGroup)->first();
+        $query = $searchModel->link;
 
-
-        $link = "https://www.asu.ru$query";
+        $link = "https://www.asu.ru$query?date=$date1-$date2";
         $html = file_get_contents($link);
-
         $crawler = new Crawler($html);
         if ($type === "students")
             $crawler = $crawler->filter('.align_top' . '.schedule_table')->first();
@@ -62,7 +82,7 @@ class TimetableController extends Controller
 
         $items = $crawler
             ->children()
-            ->each(function($node) use (&$loc, &$time, &$date, &$para, &$teacher, &$secondTime, $numGroup){
+            ->each(function($node) use (&$loc, &$time, &$date, &$para, &$teacher, &$secondTime, $numGroup, $weekNum){
             $class = $node->attr('class');
             switch ($class){
                 case "schedule_table-date":
@@ -101,9 +121,21 @@ class TimetableController extends Controller
                     $loc = $node->children()->eq(4)->text();
                     break;
             }
-            return compact('time', 'teacher', 'loc', 'date', 'para', 'numGroup');
+            return compact('weekNum', 'time', 'teacher', 'loc', 'date', 'para', 'numGroup');
         });
 
-        return json_encode($items, JSON_UNESCAPED_UNICODE);
+        $current = Week::where('weekNum', $weekNum)->first();
+        if (empty($current)){
+            Week::create([
+                'groupNum' => $numGroup,
+                'weekNum' => $weekNum,
+                'timetable' => json_encode($items, JSON_UNESCAPED_UNICODE)
+            ]);
+        } else {
+            $current->timetable = json_encode($items, JSON_UNESCAPED_UNICODE);
+            $current->save();
+        }
+
+        return Week::where(['groupNum' => $numGroup, 'weekNum' => $weekNum])->get();
     }
 }

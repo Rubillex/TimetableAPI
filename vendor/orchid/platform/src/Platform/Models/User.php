@@ -85,9 +85,6 @@ class User extends Authenticatable implements UserInterface
         'email',
         'updated_at',
         'created_at',
-        'complexity',
-        'progress',
-        'points'
     ];
 
     /**

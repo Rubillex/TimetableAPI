@@ -131,7 +131,7 @@ class DatabaseEngine extends Engine implements PaginatesEloquentModels
         );
 
         return $this->constrainForSoftDeletes(
-            $builder, $this->addAdditionalConstraints($builder, $query)
+            $builder, $this->addAdditionalConstraints($builder, $query->take($builder->limit))
         );
     }
 
@@ -168,7 +168,8 @@ class DatabaseEngine extends Engine implements PaginatesEloquentModels
                 if (in_array($column, $fullTextColumns)) {
                     $query->orWhereFullText(
                         $builder->model->qualifyColumn($column),
-                        $builder->query
+                        $builder->query,
+                        $this->getFullTextOptions($builder)
                     );
                 } else {
                     if ($canSearchPrimaryKey && $column === $builder->model->getKeyName()) {
@@ -278,6 +279,29 @@ class DatabaseEngine extends Engine implements PaginatesEloquentModels
         }
 
         return $columns;
+    }
+
+    /**
+     * Get the full-text search options for the query.
+     *
+     * @param  \Laravel\Scout\Builder  $builder
+     * @return array
+     */
+    protected function getFullTextOptions(Builder $builder)
+    {
+        $options = [];
+
+        if (PHP_MAJOR_VERSION < 8) {
+            return [];
+        }
+
+        foreach ((new ReflectionMethod($builder->model, 'toSearchableArray'))->getAttributes(SearchUsingFullText::class) as $attribute) {
+            $arguments = $attribute->getArguments()[1] ?? [];
+
+            $options = array_merge($options, Arr::wrap($arguments));
+        }
+
+        return $options;
     }
 
     /**

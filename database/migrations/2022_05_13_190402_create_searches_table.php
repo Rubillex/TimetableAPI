@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddMaxPointsToUsersTable extends Migration
+class CreateSearchesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,11 @@ class AddMaxPointsToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->double('score')->default(-1);
+        Schema::create('searches', function (Blueprint $table) {
+            $table->id();
+            $table->string("name");
+            $table->string("link");
+            $table->timestamps();
         });
     }
 
@@ -25,6 +28,6 @@ class AddMaxPointsToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('searches');
     }
 }
